@@ -1,0 +1,17 @@
+# Dipendenze Python richieste dagli external_dependencies dei moduli di
+# na_wip_module e della Collection offuscata, assenti nell'immagine odoo:19.0.
+# Verificate una a una: senza queste il check dipendenze di Odoo blocca
+# l'installazione dei moduli relativi.
+packaging              # Odoo 19 lo usa per interpretare gli external_dependency
+                       # con versione (es. num2words>=0.5.12, xlrd==1.2.0). Assente
+                       # nell'immagine base: senza, quei moduli falliscono il parsing.
+pypdf                  # na_account_vat_period_end_statement (base ha PyPDF2, pacchetto diverso)
+python-codicefiscale   # l10n_it_edi_extension  (import: codicefiscale)
+openupgradelib         # l10n_it_intrastat_oca, _intrastat_statement_oca, _edi_pec
+PyXB-X                 # na_account_sepa
+xlrd==1.2.0            # l10n_it_financial_statements_report (pin duro; base ha 2.0.1)
+# server-tools/auto_backup — external_dependencies: [paramiko<4.0.0, pysftp,
+# cryptography]. Odoo verifica una dipendenza per volta: emergono in sequenza.
+paramiko<4.0.0         # l'immagine ha una 4.x, non soddisfa il vincolo <4.0.0
+pysftp                 # assente nell'immagine base
+cryptography           # core Odoo, gia' presente: no-op difensivo (chiude il check)
