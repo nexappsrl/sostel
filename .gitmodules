@@ -122,3 +122,7 @@
 	path = modules/website
 	url = https://github.com/OCA/website.git
 	branch = 19.0
+[submodule "modules/commission"]
+	path = modules/commission
+	url = git@github.com:OCA/commission.git
+	branch = 19.0
